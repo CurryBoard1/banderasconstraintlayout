@@ -4,21 +4,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.example.banderasconstraintlayout.ui.theme.BanderasconstraintlayoutTheme
@@ -32,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    BanderaEEUUCL(modifier = Modifier.fillMaxSize())
+                    BanderaChileCL(modifier = Modifier.fillMaxSize())
                 }
             }
         }
@@ -40,66 +36,61 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun BanderaEEUUCL(modifier: Modifier = Modifier) {
+fun BanderaChileCL(modifier: Modifier = Modifier) {
     ConstraintLayout(modifier = modifier.fillMaxSize()) {
-        val franjas = List(13) { createRef() }
-        val canton = createRef()
+        val (blanco, rojo, canton) = createRefs()
 
-        val finCanton = createGuidelineFromStart(0.4f)
-        val bajoCanton = createGuidelineFromTop(0.54f)
+        val mitad = createGuidelineFromTop(0.5f)
+        val tercio = createGuidelineFromStart(0.33f)
 
-        createVerticalChain(*franjas.toTypedArray(), chainStyle = ChainStyle.Spread)
+        Box(
+            modifier = Modifier
+                .constrainAs(blanco) {
+                    top.linkTo(parent.top)
+                    bottom.linkTo(mitad)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    width = Dimension.fillToConstraints
+                    height = Dimension.fillToConstraints
+                }
+                .background(Color.White)
+        )
 
-        franjas.forEachIndexed { index, franja ->
-            Box(
-                modifier = Modifier
-                    .constrainAs(franja) {
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                        if (index == 0) top.linkTo(parent.top)
-                        if (index == 12) bottom.linkTo(parent.bottom)
-                        width = Dimension.fillToConstraints
-                        height = Dimension.fillToConstraints
-                    }
-                    .background(if (index % 2 == 0) Color(0xFFB22234) else Color.White)
-            )
-        }
+        Box(
+            modifier = Modifier
+                .constrainAs(rojo) {
+                    top.linkTo(mitad)
+                    bottom.linkTo(parent.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    width = Dimension.fillToConstraints
+                    height = Dimension.fillToConstraints
+                }
+                .background(Color(0xFFD52B1E))
+        )
 
         Box(
             modifier = Modifier
                 .constrainAs(canton) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
-                    end.linkTo(finCanton)
-                    bottom.linkTo(bajoCanton)
+                    end.linkTo(tercio)
+                    bottom.linkTo(mitad)
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
                 }
-                .background(Color(0xFF3C3B6E))
+                .background(Color(0xFF0039A6)),
+            contentAlignment = Alignment.Center
         ) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.SpaceEvenly
-            ) {
-                repeat(5) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceEvenly
-                    ) {
-                        repeat(6) {
-                            Text(text = "★", color = Color.White, fontSize = 12.sp)
-                        }
-                    }
-                }
-            }
+            Text(text = "★", color = Color.White, fontSize = 40.sp)
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun BanderaEEUUCLPreview() {
+fun BanderaChileCLPreview() {
     BanderasconstraintlayoutTheme {
-        BanderaEEUUCL(modifier = Modifier.fillMaxSize())
+        BanderaChileCL(modifier = Modifier.fillMaxSize())
     }
 }
