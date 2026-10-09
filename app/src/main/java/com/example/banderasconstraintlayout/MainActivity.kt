@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    BanderaAlemaniaCL(modifier = Modifier.fillMaxSize())
+                    BanderaEspanaCL(modifier = Modifier.fillMaxSize())
                 }
             }
         }
@@ -33,17 +33,17 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun BanderaAlemaniaCL(modifier: Modifier = Modifier) {
+fun BanderaEspanaCL(modifier: Modifier = Modifier) {
     ConstraintLayout(modifier = modifier.fillMaxSize()) {
-        val (negro, rojo, amarillo) = createRefs()
+        val (rojoArriba, amarillo, rojoAbajo) = createRefs()
 
-        // ahora las guias son horizontales (desde arriba)
-        val guia1 = createGuidelineFromTop(1f / 3f)
-        val guia2 = createGuidelineFromTop(2f / 3f)
+        // proporcion 1 : 2 : 1  ->  guias al 25% y al 75%
+        val guia1 = createGuidelineFromTop(0.25f)
+        val guia2 = createGuidelineFromTop(0.75f)
 
         Box(
             modifier = Modifier
-                .constrainAs(negro) {
+                .constrainAs(rojoArriba) {
                     top.linkTo(parent.top)
                     bottom.linkTo(guia1)
                     start.linkTo(parent.start)
@@ -51,12 +51,12 @@ fun BanderaAlemaniaCL(modifier: Modifier = Modifier) {
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
                 }
-                .background(Color.Black)
+                .background(Color(0xFFAA151B))
         )
 
         Box(
             modifier = Modifier
-                .constrainAs(rojo) {
+                .constrainAs(amarillo) {
                     top.linkTo(guia1)
                     bottom.linkTo(guia2)
                     start.linkTo(parent.start)
@@ -64,12 +64,12 @@ fun BanderaAlemaniaCL(modifier: Modifier = Modifier) {
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
                 }
-                .background(Color(0xFFDD0000))
+                .background(Color(0xFFF1BF00))
         )
 
         Box(
             modifier = Modifier
-                .constrainAs(amarillo) {
+                .constrainAs(rojoAbajo) {
                     top.linkTo(guia2)
                     bottom.linkTo(parent.bottom)
                     start.linkTo(parent.start)
@@ -77,15 +77,15 @@ fun BanderaAlemaniaCL(modifier: Modifier = Modifier) {
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
                 }
-                .background(Color(0xFFFFCE00))
+                .background(Color(0xFFAA151B))
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun BanderaAlemaniaCLPreview() {
+fun BanderaEspanaCLPreview() {
     BanderasconstraintlayoutTheme {
-        BanderaAlemaniaCL(modifier = Modifier.fillMaxSize())
+        BanderaEspanaCL(modifier = Modifier.fillMaxSize())
     }
 }
