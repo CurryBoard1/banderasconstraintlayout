@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    BanderaItaliaCL(modifier = Modifier.fillMaxSize())
+                    BanderaAlemaniaCL(modifier = Modifier.fillMaxSize())
                 }
             }
         }
@@ -33,58 +33,59 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun BanderaItaliaCL(modifier: Modifier = Modifier) {
+fun BanderaAlemaniaCL(modifier: Modifier = Modifier) {
     ConstraintLayout(modifier = modifier.fillMaxSize()) {
-        val (verde, blanco, rojo) = createRefs()
+        val (negro, rojo, amarillo) = createRefs()
 
-        val guia1 = createGuidelineFromStart(1f / 3f)
-        val guia2 = createGuidelineFromStart(2f / 3f)
+        // ahora las guias son horizontales (desde arriba)
+        val guia1 = createGuidelineFromTop(1f / 3f)
+        val guia2 = createGuidelineFromTop(2f / 3f)
 
         Box(
             modifier = Modifier
-                .constrainAs(verde) {
+                .constrainAs(negro) {
                     top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom)
+                    bottom.linkTo(guia1)
                     start.linkTo(parent.start)
-                    end.linkTo(guia1)
+                    end.linkTo(parent.end)
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
                 }
-                .background(Color(0xFF009246))
-        )
-
-        Box(
-            modifier = Modifier
-                .constrainAs(blanco) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(guia1)
-                    end.linkTo(guia2)
-                    width = Dimension.fillToConstraints
-                    height = Dimension.fillToConstraints
-                }
-                .background(Color.White)
+                .background(Color.Black)
         )
 
         Box(
             modifier = Modifier
                 .constrainAs(rojo) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(guia2)
+                    top.linkTo(guia1)
+                    bottom.linkTo(guia2)
+                    start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
                 }
-                .background(Color(0xFFCE2B37))
+                .background(Color(0xFFDD0000))
+        )
+
+        Box(
+            modifier = Modifier
+                .constrainAs(amarillo) {
+                    top.linkTo(guia2)
+                    bottom.linkTo(parent.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    width = Dimension.fillToConstraints
+                    height = Dimension.fillToConstraints
+                }
+                .background(Color(0xFFFFCE00))
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun BanderaItaliaCLPreview() {
+fun BanderaAlemaniaCLPreview() {
     BanderasconstraintlayoutTheme {
-        BanderaItaliaCL(modifier = Modifier.fillMaxSize())
+        BanderaAlemaniaCL(modifier = Modifier.fillMaxSize())
     }
 }
