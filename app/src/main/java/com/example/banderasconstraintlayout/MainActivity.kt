@@ -6,12 +6,16 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.example.banderasconstraintlayout.ui.theme.BanderasconstraintlayoutTheme
@@ -25,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    BanderaColombiaCL(modifier = Modifier.fillMaxSize())
+                    BanderaArgentinaCL(modifier = Modifier.fillMaxSize())
                 }
             }
         }
@@ -33,17 +37,16 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun BanderaColombiaCL(modifier: Modifier = Modifier) {
+fun BanderaArgentinaCL(modifier: Modifier = Modifier) {
     ConstraintLayout(modifier = modifier.fillMaxSize()) {
-        val (amarillo, azul, rojo) = createRefs()
+        val (celesteArriba, blanco, celesteAbajo, sol) = createRefs()
 
-        // proporcion 2 : 1 : 1  ->  guias al 50% y al 75%
-        val guia1 = createGuidelineFromTop(0.5f)
-        val guia2 = createGuidelineFromTop(0.75f)
+        val guia1 = createGuidelineFromTop(1f / 3f)
+        val guia2 = createGuidelineFromTop(2f / 3f)
 
         Box(
             modifier = Modifier
-                .constrainAs(amarillo) {
+                .constrainAs(celesteArriba) {
                     top.linkTo(parent.top)
                     bottom.linkTo(guia1)
                     start.linkTo(parent.start)
@@ -51,12 +54,12 @@ fun BanderaColombiaCL(modifier: Modifier = Modifier) {
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
                 }
-                .background(Color(0xFFFCD116))
+                .background(Color(0xFF74ACDF))
         )
 
         Box(
             modifier = Modifier
-                .constrainAs(azul) {
+                .constrainAs(blanco) {
                     top.linkTo(guia1)
                     bottom.linkTo(guia2)
                     start.linkTo(parent.start)
@@ -64,12 +67,12 @@ fun BanderaColombiaCL(modifier: Modifier = Modifier) {
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
                 }
-                .background(Color(0xFF003893))
+                .background(Color.White)
         )
 
         Box(
             modifier = Modifier
-                .constrainAs(rojo) {
+                .constrainAs(celesteAbajo) {
                     top.linkTo(guia2)
                     bottom.linkTo(parent.bottom)
                     start.linkTo(parent.start)
@@ -77,15 +80,28 @@ fun BanderaColombiaCL(modifier: Modifier = Modifier) {
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
                 }
-                .background(Color(0xFFCE1126))
+                .background(Color(0xFF74ACDF))
+        )
+
+        Box(
+            modifier = Modifier
+                .constrainAs(sol) {
+                    top.linkTo(parent.top)
+                    bottom.linkTo(parent.bottom)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
+                .size(50.dp)
+                .clip(CircleShape)
+                .background(Color(0xFFF6B40E))
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun BanderaColombiaCLPreview() {
+fun BanderaArgentinaCLPreview() {
     BanderasconstraintlayoutTheme {
-        BanderaColombiaCL(modifier = Modifier.fillMaxSize())
+        BanderaArgentinaCL(modifier = Modifier.fillMaxSize())
     }
 }
