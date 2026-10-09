@@ -1,8 +1,12 @@
-package com.example.banderascompose
+package com.example.banderasconstraintlayout
 
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -10,11 +14,28 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import com.example.banderasconstraintlayout.ui.theme.BanderasconstraintlayoutTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            BanderasconstraintlayoutTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    BanderaFranciaCL(modifier = Modifier.fillMaxSize())
+                }
+            }
+        }
+    }
+}
 
 @Composable
 fun BanderaFranciaCL(modifier: Modifier = Modifier) {
     ConstraintLayout(modifier = modifier.fillMaxSize()) {
-        val (azul, blanco, rojo) = createRefs()
+        val (azul, blanco, rojo) = createRefs() //etiquetando
 
         val guia1 = createGuidelineFromStart(1f / 3f)
         val guia2 = createGuidelineFromStart(2f / 3f)
@@ -63,7 +84,7 @@ fun BanderaFranciaCL(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun BanderaFranciaCLPreview() {
-    Surface {
+    BanderasconstraintlayoutTheme {
         BanderaFranciaCL(modifier = Modifier.fillMaxSize())
     }
 }
