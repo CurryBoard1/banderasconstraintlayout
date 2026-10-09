@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    BanderaFranciaCL(modifier = Modifier.fillMaxSize())
+                    BanderaItaliaCL(modifier = Modifier.fillMaxSize())
                 }
             }
         }
@@ -33,16 +33,16 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun BanderaFranciaCL(modifier: Modifier = Modifier) {
+fun BanderaItaliaCL(modifier: Modifier = Modifier) {
     ConstraintLayout(modifier = modifier.fillMaxSize()) {
-        val (azul, blanco, rojo) = createRefs() //etiquetando
+        val (verde, blanco, rojo) = createRefs()
 
         val guia1 = createGuidelineFromStart(1f / 3f)
         val guia2 = createGuidelineFromStart(2f / 3f)
 
         Box(
             modifier = Modifier
-                .constrainAs(azul) {
+                .constrainAs(verde) {
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
                     start.linkTo(parent.start)
@@ -50,7 +50,7 @@ fun BanderaFranciaCL(modifier: Modifier = Modifier) {
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
                 }
-                .background(Color(0xFF0055A4))
+                .background(Color(0xFF009246))
         )
 
         Box(
@@ -76,15 +76,15 @@ fun BanderaFranciaCL(modifier: Modifier = Modifier) {
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
                 }
-                .background(Color(0xFFEF4135))
+                .background(Color(0xFFCE2B37))
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun BanderaFranciaCLPreview() {
+fun BanderaItaliaCLPreview() {
     BanderasconstraintlayoutTheme {
-        BanderaFranciaCL(modifier = Modifier.fillMaxSize())
+        BanderaItaliaCL(modifier = Modifier.fillMaxSize())
     }
 }
