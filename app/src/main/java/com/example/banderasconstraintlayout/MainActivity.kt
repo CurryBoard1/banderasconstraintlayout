@@ -1,52 +1,27 @@
-package com.example.banderasconstraintlayout
+package com.example.banderascompose
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.example.banderasconstraintlayout.ui.theme.BanderasconstraintlayoutTheme
-
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            BanderasconstraintlayoutTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    BanderaMexicoCL(modifier = Modifier.fillMaxSize())
-                }
-            }
-        }
-    }
-}
 
 @Composable
-fun BanderaMexicoCL(modifier: Modifier = Modifier) {
+fun BanderaFranciaCL(modifier: Modifier = Modifier) {
     ConstraintLayout(modifier = modifier.fillMaxSize()) {
-        val (verde, blanco, rojo, escudo) = createRefs()
+        val (azul, blanco, rojo) = createRefs()
 
         val guia1 = createGuidelineFromStart(1f / 3f)
         val guia2 = createGuidelineFromStart(2f / 3f)
 
         Box(
             modifier = Modifier
-                .constrainAs(verde) {
+                .constrainAs(azul) {
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
                     start.linkTo(parent.start)
@@ -54,7 +29,7 @@ fun BanderaMexicoCL(modifier: Modifier = Modifier) {
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
                 }
-                .background(Color(0xFF006341))
+                .background(Color(0xFF0055A4))
         )
 
         Box(
@@ -80,28 +55,15 @@ fun BanderaMexicoCL(modifier: Modifier = Modifier) {
                     width = Dimension.fillToConstraints
                     height = Dimension.fillToConstraints
                 }
-                .background(Color(0xFFCE1126))
-        )
-
-        Box(
-            modifier = Modifier
-                .constrainAs(escudo) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(guia1)
-                    end.linkTo(guia2)
-                }
-                .size(60.dp)
-                .clip(CircleShape)
-                .background(Color(0xFFC9A227))
+                .background(Color(0xFFEF4135))
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun BanderaMexicoCLPreview() {
-    BanderasconstraintlayoutTheme {
-        BanderaMexicoCL(modifier = Modifier.fillMaxSize())
+fun BanderaFranciaCLPreview() {
+    Surface {
+        BanderaFranciaCL(modifier = Modifier.fillMaxSize())
     }
 }
