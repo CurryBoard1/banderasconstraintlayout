@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -29,42 +28,21 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    BanderaBrasilCL(modifier = Modifier.fillMaxSize())
+                    BanderaJaponCL(modifier = Modifier.fillMaxSize())
                 }
             }
         }
     }
 }
 
-val RomboShapeCL = GenericShape { size, _ ->
-    moveTo(size.width / 2f, 0f)
-    lineTo(size.width, size.height / 2f)
-    lineTo(size.width / 2f, size.height)
-    lineTo(0f, size.height / 2f)
-    close()
-}
-
 @Composable
-fun BanderaBrasilCL(modifier: Modifier = Modifier) {
+fun BanderaJaponCL(modifier: Modifier = Modifier) {
     ConstraintLayout(
         modifier = modifier
             .fillMaxSize()
-            .background(Color(0xFF009B3A))
+            .background(Color.White)
     ) {
-        val (rombo, circulo) = createRefs()
-
-        Box(
-            modifier = Modifier
-                .constrainAs(rombo) {
-                    top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                }
-                .fillMaxSize(0.75f)
-                .clip(RomboShapeCL)
-                .background(Color(0xFFFEDF00))
-        )
+        val circulo = createRef()
 
         Box(
             modifier = Modifier
@@ -74,17 +52,17 @@ fun BanderaBrasilCL(modifier: Modifier = Modifier) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                 }
-                .size(90.dp)
+                .size(120.dp)
                 .clip(CircleShape)
-                .background(Color(0xFF002776))
+                .background(Color(0xFFBC002D))
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun BanderaBrasilCLPreview() {
+fun BanderaJaponCLPreview() {
     BanderasconstraintlayoutTheme {
-        BanderaBrasilCL(modifier = Modifier.fillMaxSize())
+        BanderaJaponCL(modifier = Modifier.fillMaxSize())
     }
 }
