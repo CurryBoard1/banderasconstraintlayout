@@ -1,0 +1,3 @@
+- [x] Investigar y diseñar la franja curva blanca para la bandera de Brasil `[x]`
+- [x] Actualizar `MainActivity.kt` con los detalles visuales de la bandera `[x]`
+- [x] Compilar y verificar cambios `[x]`
